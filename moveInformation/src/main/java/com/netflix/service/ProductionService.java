@@ -17,10 +17,11 @@ public class ProductionService {
     private final ProductionRepository productionRepository;
     private final ProductionWorkerService productionWorkerService;
 
-    public void insertDataProduction(ProductionRegisterDTO productionRegisterDTO){
+    public long insertDataProduction(ProductionRegisterDTO productionRegisterDTO){
         ProductionEntity productionEntity = new ProductionEntity();
         productionEntity.saveProduction(productionRegisterDTO);
         productionRepository.save(productionEntity);
+        return productionEntity.getProductionId();
     }
 
     @Transactional

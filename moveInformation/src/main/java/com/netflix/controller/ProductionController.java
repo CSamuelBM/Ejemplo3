@@ -17,7 +17,7 @@ public class ProductionController {
     }
 
     @PostMapping()
-    public void insertDataProduction(@RequestBody ProductionRegisterDTO productionRegisterDTO){
-        productionService.insertDataProduction(productionRegisterDTO);
+    public long insertDataProduction(@RequestBody ProductionRegisterDTO productionRegisterDTO){
+        return productionService.insertDataProduction(productionRegisterDTO);
     }
 }

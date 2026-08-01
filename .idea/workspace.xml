@@ -6,11 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="65c8c8a0-01af-4edc-bd10-35e14e03f54f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moveInformation/src/main/java/com/netflix/dto/ProductionDTO/ProductionRegisterDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/moveInformation/src/main/java/com/netflix/dto/ProductionDTO/ProductionRegisterDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moveInformation/src/main/java/com/netflix/dto/ProductionDTO/ProductionResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/moveInformation/src/main/java/com/netflix/dto/ProductionDTO/ProductionResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moveInformation/src/main/java/com/netflix/dto/ProductionWorkerDTO/ProductionWorkerResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/moveInformation/src/main/java/com/netflix/dto/ProductionWorkerDTO/ProductionWorkerResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moveInformation/src/main/java/com/netflix/entity/ProductionEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/moveInformation/src/main/java/com/netflix/entity/ProductionEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/moveInformation/src/main/java/com/netflix/service/ProductionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/moveInformation/src/main/java/com/netflix/service/ProductionService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +52,7 @@
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/caramelos/Descargas/Streaming_Info&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/caramelos/Downloads/Streaming_Info&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
