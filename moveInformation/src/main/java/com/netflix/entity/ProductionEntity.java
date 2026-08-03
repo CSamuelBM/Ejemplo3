@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Table(name="production")
@@ -19,7 +20,7 @@ public class ProductionEntity {
 
     @Column(name="all_hectares") private double allHectares;
     @Column(name="total_cast") private double totalCast;
-    @OneToMany(mappedBy="productionEntity") private List<ProductionWorkerEntity> productionWorker;
+    @OneToMany(mappedBy="productionEntity", cascade = CascadeType.ALL, orphanRemoval = true) private List<ProductionWorkerEntity> productionWorker = new ArrayList<>();
 
     public void saveProduction(ProductionRegisterDTO productionRegisterDTO){
         this.setAllWorkers(productionRegisterDTO.allWorkers());
