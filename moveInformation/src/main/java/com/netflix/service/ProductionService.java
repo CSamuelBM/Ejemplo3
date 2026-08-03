@@ -5,7 +5,7 @@ import com.netflix.dto.ProductionDTO.ProductionResponseDTO;
 import com.netflix.dto.ProductionWorkerDTO.ProductionWorkerRegisterDTO;
 import com.netflix.entity.ProductionEntity;
 import com.netflix.repository.ProductionRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ProductionService {
     private final ProductionRepository productionRepository;
     private final ProductionWorkerService productionWorkerService;
 
+    @Transactional
     public ProductionResponseDTO getDataProduction(long productionId){
         ProductionEntity productionEntity = productionRepository.findById(productionId).orElseThrow();
         return new ProductionResponseDTO(
@@ -40,7 +42,7 @@ public class ProductionService {
         return ProductionResponseDTO.productionResponseDTO(productionEntity);
     }
 
-    public double generalProduction(ProductionEntity production) {
+    private double generalProduction(ProductionEntity production) {
         java.util.concurrent.ThreadLocalRandom random = java.util.concurrent.ThreadLocalRandom.current();
 
         long totalWorkers = production.getAllWorkers();
