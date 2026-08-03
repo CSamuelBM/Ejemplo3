@@ -34,12 +34,16 @@ public class ProductionService {
     public ProductionResponseDTO insertDataProduction(ProductionRegisterDTO productionRegisterDTO) {
         ProductionEntity productionEntity = new ProductionEntity();
         productionEntity.saveProduction(productionRegisterDTO);
-        productionRepository.save(productionEntity);
+        productionEntity = productionRepository.save(productionEntity);
 
         double totalCast = generalProduction(productionEntity);
         productionEntity.setTotalCast(totalCast);
 
-        return ProductionResponseDTO.productionResponseDTO(productionEntity);
+        productionRepository.flush();
+
+        ProductionEntity production = productionRepository.findById(productionEntity.getProductionId()).orElseThrow();
+
+        return ProductionResponseDTO.productionResponseDTO(production);
     }
 
     private double generalProduction(ProductionEntity production) {
