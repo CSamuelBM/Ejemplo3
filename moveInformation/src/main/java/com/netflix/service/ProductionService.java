@@ -17,28 +17,31 @@ public class ProductionService {
     private final ProductionRepository productionRepository;
     private final ProductionWorkerService productionWorkerService;
 
-    public long insertDataProduction(ProductionRegisterDTO productionRegisterDTO){
-        ProductionEntity productionEntity = new ProductionEntity();
-        productionEntity.saveProduction(productionRegisterDTO);
-        productionRepository.save(productionEntity);
-        return productionEntity.getProductionId();
-    }
-
-    @Transactional
-    public ProductionResponseDTO getDataProduction(long productionId) {
-        ProductionEntity production = productionCast(productionId);
+    public ProductionResponseDTO getDataProduction(long productionId){
+        ProductionEntity productionEntity = productionRepository.findById(productionId).orElseThrow();
         return new ProductionResponseDTO(
-                production.getProductionId(),
-                production.getAllWorkers(),
-                production.getAllHectares(),
-                production.getTotalCast(),
-                ProductionResponseDTO.productionResponseDTO(production).productionWorker()
+                productionEntity.getProductionId(),
+                productionEntity.getAllWorkers(),
+                productionEntity.getAllHectares(),
+                productionEntity.getTotalCast(),
+                ProductionResponseDTO.productionResponseDTO(productionEntity).productionWorker()
         );
     }
 
-    private ProductionEntity productionCast(long productionId){
+    @Transactional
+    public ProductionResponseDTO insertDataProduction(ProductionRegisterDTO productionRegisterDTO) {
+        ProductionEntity productionEntity = new ProductionEntity();
+        productionEntity.saveProduction(productionRegisterDTO);
+        productionRepository.save(productionEntity);
+
+        double totalCast = generalProduction(productionEntity);
+        productionEntity.setTotalCast(totalCast);
+
+        return ProductionResponseDTO.productionResponseDTO(productionEntity);
+    }
+
+    public double generalProduction(ProductionEntity production) {
         java.util.concurrent.ThreadLocalRandom random = java.util.concurrent.ThreadLocalRandom.current();
-        ProductionEntity production = productionRepository.findById(productionId).orElseThrow();
 
         long totalWorkers = production.getAllWorkers();
         double totalHectares = production.getAllHectares();
@@ -53,14 +56,15 @@ public class ProductionService {
         }
 
         factor = totalHectares / sumWeight;
+
         for(int i = 0; i < totalWorkers; i++) {
             cast = listWeight.get(i) * factor;
             totalCast += cast;
-            ProductionWorkerRegisterDTO productionWorkerRegisterDTO = new ProductionWorkerRegisterDTO(cast, production);
-            productionWorkerService.insertDataProductionWorker(productionWorkerRegisterDTO);
+            ProductionWorkerRegisterDTO workerRegisterDTO = new ProductionWorkerRegisterDTO(cast, production);
+            productionWorkerService.insertDataProductionWorker(workerRegisterDTO);
         }
 
-        production.setTotalCast(totalCast);
-        return production;
+        return totalCast;
     }
+
 }

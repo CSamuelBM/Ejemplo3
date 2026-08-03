@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65c8c8a0-01af-4edc-bd10-35e14e03f54f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/moveInformation/src/main/java/com/netflix/service/ProductionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/moveInformation/src/main/java/com/netflix/service/ProductionService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
