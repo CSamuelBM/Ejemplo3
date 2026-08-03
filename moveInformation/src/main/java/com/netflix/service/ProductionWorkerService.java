@@ -14,10 +14,10 @@ public class ProductionWorkerService {
     private final ProductionWorkerRepository productionWorkerRepository;
 
     @Transactional
-    public void insertDataProductionWorker(ProductionWorkerRegisterDTO productionWorkerRegisterDTO){
+    public ProductionWorkerEntity insertDataProductionWorker(ProductionWorkerRegisterDTO productionWorkerRegisterDTO){
         ProductionWorkerEntity productionWorkerEntity = new ProductionWorkerEntity();
         productionWorkerEntity.saveProductionWorker(productionWorkerRegisterDTO);
-        productionWorkerRepository.save(productionWorkerEntity);
+        return  productionWorkerRepository.save(productionWorkerEntity);
     }
 
     @Transactional

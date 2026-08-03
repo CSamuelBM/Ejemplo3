@@ -4,6 +4,7 @@ import com.netflix.dto.ProductionDTO.ProductionRegisterDTO;
 import com.netflix.dto.ProductionDTO.ProductionResponseDTO;
 import com.netflix.dto.ProductionWorkerDTO.ProductionWorkerRegisterDTO;
 import com.netflix.entity.ProductionEntity;
+import com.netflix.entity.ProductionWorkerEntity;
 import com.netflix.repository.ProductionRepository;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -39,11 +40,9 @@ public class ProductionService {
         double totalCast = generalProduction(productionEntity);
         productionEntity.setTotalCast(totalCast);
 
-        productionRepository.flush();
+        productionRepository.saveAndFlush(productionEntity);
 
-        ProductionEntity production = productionRepository.findById(productionEntity.getProductionId()).orElseThrow();
-
-        return ProductionResponseDTO.productionResponseDTO(production);
+        return ProductionResponseDTO.productionResponseDTO(productionEntity);
     }
 
     private double generalProduction(ProductionEntity production) {
@@ -63,11 +62,16 @@ public class ProductionService {
 
         factor = totalHectares / sumWeight;
 
+        if(production.getProductionWorker() != null)
+            production.setProductionWorker(new ArrayList<>());
+
         for(int i = 0; i < totalWorkers; i++) {
             cast = listWeight.get(i) * factor;
             totalCast += cast;
             ProductionWorkerRegisterDTO workerRegisterDTO = new ProductionWorkerRegisterDTO(cast, production);
-            productionWorkerService.insertDataProductionWorker(workerRegisterDTO);
+            ProductionWorkerEntity productionWorker = productionWorkerService.insertDataProductionWorker(workerRegisterDTO);
+            if(productionWorker != null)
+                production.getProductionWorker().add(productionWorker);
         }
 
         return totalCast;
