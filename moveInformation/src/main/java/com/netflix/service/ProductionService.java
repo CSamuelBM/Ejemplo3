@@ -62,7 +62,7 @@ public class ProductionService {
 
         factor = totalHectares / sumWeight;
 
-        if(production.getProductionWorker() != null)
+        if(production.getProductionWorker() == null)
             production.setProductionWorker(new ArrayList<>());
 
         for(int i = 0; i < totalWorkers; i++) {
